@@ -77,13 +77,16 @@
     font-size:14px; letter-spacing:.1em; color:var(--chrome); opacity:.6; margin:0 0 26px;
   }
 
-  /* Chrome monogram badge — evokes a car emblem without copying any brand mark */
+  /* Badge monogramme — fond uniforme avec le thème (plus de blanc) */
   .badge{
     width:118px; height:118px; margin-bottom:22px;
     display:flex; align-items:center; justify-content:center;
     filter:drop-shadow(0 0 22px rgba(62,127,219,.35));
+    background:radial-gradient(circle at 50% 40%, var(--steel-light), var(--onyx) 75%);
+    border:1px solid var(--line);
+    border-radius:50%;
   }
-  .badge img{ width:100%; height:100%; object-fit:contain; transition:opacity .4s ease; }
+  .badge img{ width:78%; height:78%; object-fit:contain; transition:opacity .4s ease; }
 
   /* ===== LED MATRIX OPENING ANIMATION ===== */
   .led-overlay{
@@ -125,7 +128,7 @@
     color:var(--blue-glow);
     text-transform:uppercase;
     margin:0 0 20px;
-    padding-left:.5em; /* optical centering for the wide tracking */
+    padding-left:.5em;
   }
   .name-title{
     font-family:'Barlow Condensed', sans-serif;
@@ -207,6 +210,7 @@
     font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--chrome); opacity:.7;
   }
 
+  /* Boutons — couleur d'origine (chrome/blanc) */
   .btn-chrome{
     font-family:'Oswald', sans-serif;
     letter-spacing:.16em;
@@ -302,19 +306,19 @@
   }
   .save-date-btn:hover{ transform:translateY(-2px); }
 
-  /* license-plate style "Mazal Tov" motif, echoing the client's original visual */
+  /* Motif "Mazal Tov" — fond uniforme bleu/acier au lieu de la plaque blanche */
   .plate{
     display:inline-flex; align-items:center; gap:10px;
     margin:0 auto 50px; padding:10px 22px;
-    background:linear-gradient(180deg, #E9EEF3, #C9D2DC);
-    color:var(--onyx);
-    border:2px solid #7C8C9C;
+    background:linear-gradient(180deg, var(--steel-light), var(--steel));
+    color:var(--blue-glow);
+    border:1px solid var(--blue);
     border-radius:4px;
     font-family:'Oswald', sans-serif; font-weight:700; letter-spacing:.14em; font-size:18px;
-    box-shadow:0 8px 18px rgba(0,0,0,.4);
+    box-shadow:0 8px 18px rgba(0,0,0,.4), 0 0 16px rgba(62,127,219,.2);
   }
   .plate-wrap{ text-align:center; }
-  .plate::before, .plate::after{ content:''; width:6px; height:20px; background:#7C8C9C; border-radius:1px; }
+  .plate::before, .plate::after{ content:''; width:6px; height:20px; background:var(--blue); border-radius:1px; opacity:.6; }
 
   .hosts{ text-align:center; margin:50px 0 56px; }
   .hosts-line{ font-size:18px; color:var(--chrome-bright); margin-bottom:14px; }
@@ -522,7 +526,7 @@
 
 <script>
   // ===== CONFIG =====
-  // Remplace cette URL par celle de ton Google Apps Script Web App pour recevoir les r\u00e9ponses RSVP
+  // Remplace cette URL par celle de ton Google Apps Script Web App pour recevoir les réponses RSVP
   const SCRIPT_URL = "COLLE_ICI_TON_URL_GOOGLE_APPS_SCRIPT";
 
   // ===== COUNTDOWN =====
@@ -574,7 +578,6 @@
     overlay.classList.add('active');
 
     const stepDelay = 38;
-    // left matrix sweeps left -> right (inward); right matrix sweeps right -> left (inward)
     leftCells.forEach((cell, i) => {
       const col = i % cols, row = Math.floor(i / cols);
       setTimeout(() => cell.classList.add('on'), col * stepDelay + row * 10);
@@ -604,7 +607,7 @@
     });
   });
 
-  // ===== BLOQUER LA DATE : g\u00e9n\u00e8re un fichier .ics =====
+  // ===== BLOQUER LA DATE : génère un fichier .ics =====
   document.getElementById('saveDateBtn').addEventListener('click', () => {
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -617,8 +620,8 @@
       'DTSTAMP:20260901T000000Z',
       'DTSTART:20261115T090000Z',
       'DTEND:20261115T130000Z',
-      'SUMMARY:Bar Mitsva d\u2019Eliel Me\u00efr \u2013 Pose des T\u00e9filine & R\u00e9ception',
-      'DESCRIPTION:Pose des T\u00e9filine suivie de la r\u00e9ception pour la Bar Mitsva d\u2019Eliel Me\u00efr',
+      'SUMMARY:Bar Mitsva d\u2019Eliel Meïr \u2013 Pose des Téfiline & Réception',
+      'DESCRIPTION:Pose des Téfiline suivie de la réception pour la Bar Mitsva d\u2019Eliel Meïr',
       'LOCATION:Factory 58 \u2013 Salon La Villa\\, 12 Rue Gutenberg\\, 93000 Bobigny',
       'STATUS:CONFIRMED',
       'END:VEVENT',
@@ -713,17 +716,17 @@
       body: JSON.stringify(data)
     })
     .then(() => {
-      msgEl.textContent = "Merci ! Votre r\u00e9ponse a bien \u00e9t\u00e9 enregistr\u00e9e.";
+      msgEl.textContent = "Merci ! Votre réponse a bien été enregistrée.";
       msgEl.className = 'rsvp-msg ok';
       form.reset();
       presenceSubFields.classList.add('show');
-      submitBtn.textContent = "Envoy\u00e9";
+      submitBtn.textContent = "Envoyé";
     })
     .catch(() => {
-      msgEl.textContent = "Une erreur est survenue. Merci de r\u00e9essayer.";
+      msgEl.textContent = "Une erreur est survenue. Merci de réessayer.";
       msgEl.className = 'rsvp-msg bad';
       submitBtn.disabled = false;
-      submitBtn.textContent = "Envoyer ma r\u00e9ponse";
+      submitBtn.textContent = "Envoyer ma réponse";
     });
   });
 </script>
