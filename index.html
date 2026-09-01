@@ -83,7 +83,39 @@
     display:flex; align-items:center; justify-content:center;
     filter:drop-shadow(0 0 22px rgba(62,127,219,.35));
   }
-  .badge svg{ width:100%; height:100%; }
+  .badge img{ width:100%; height:100%; object-fit:contain; transition:opacity .4s ease; }
+
+  /* ===== LED MATRIX OPENING ANIMATION ===== */
+  .led-overlay{
+    position:fixed; inset:0; z-index:60;
+    background:#000;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 7vw;
+    opacity:0; pointer-events:none;
+    transition:opacity .55s ease;
+  }
+  .led-overlay.active{ opacity:1; pointer-events:auto; }
+  .led-overlay.fade-out{ opacity:0; }
+  .led-cluster{
+    display:grid;
+    grid-template-columns:repeat(6, 11px);
+    grid-auto-rows:11px;
+    gap:5px;
+  }
+  .led-cell{
+    width:11px; height:11px;
+    background:rgba(111,168,245,.06);
+    border-radius:1px;
+    opacity:.4;
+    transform:scale(.5);
+    transition:opacity .16s ease, transform .16s ease, background .16s ease, box-shadow .16s ease;
+  }
+  .led-cell.on{
+    opacity:1;
+    transform:scale(1);
+    background:var(--blue-glow);
+    box-shadow:0 0 8px 2px rgba(111,168,245,.85), 0 0 18px 5px rgba(111,168,245,.35);
+  }
 
   .eyebrow{
     font-family:'Oswald', sans-serif;
@@ -120,6 +152,26 @@
     letter-spacing:.08em;
     color:var(--chrome-bright);
     margin-bottom:4px;
+  }
+
+  .portrait-frame{
+    width:min(260px, 62vw);
+    aspect-ratio:733/1024;
+    margin:6px 0 32px;
+    border-radius:6px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid var(--line);
+    box-shadow:0 0 0 6px var(--onyx), 0 0 0 7px var(--line), 0 20px 46px rgba(0,0,0,.5), 0 0 30px rgba(62,127,219,.18);
+  }
+  .portrait-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .portrait-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.35);
+    pointer-events:none;
   }
   .sub-place{
     font-size:16px;
@@ -323,7 +375,7 @@
   .rsvp-msg.bad{ color:#E67878; display:block; }
 
   .footer-mark{ width:72px; height:72px; margin:60px auto 0; opacity:.9; }
-  .footer-mark svg{ width:100%; height:100%; }
+  .footer-mark img{ width:100%; height:100%; object-fit:contain; }
 
   @media (max-width:480px){
     .cd-box{ width:58px; padding:10px 2px 8px; }
@@ -338,6 +390,12 @@
 
 <div class="road-bg"></div>
 
+<!-- LED matrix headlight-style intro, played when the invitation opens -->
+<div class="led-overlay" id="ledOverlay">
+  <div class="led-cluster left" id="ledLeft"></div>
+  <div class="led-cluster right" id="ledRight"></div>
+</div>
+
 <!-- ===================== COVER ===================== -->
 <section id="cover">
   <div class="frame"></div>
@@ -345,38 +403,16 @@
   <p class="bsd">ב"ה</p>
 
   <div class="badge">
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="badgeRing" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#EAF1F7"/>
-          <stop offset="50%" stop-color="#9FB3C5"/>
-          <stop offset="100%" stop-color="#5B7085"/>
-        </linearGradient>
-        <linearGradient id="badgeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#6FA8F5"/>
-          <stop offset="100%" stop-color="#2C5FA8"/>
-        </linearGradient>
-      </defs>
-      <circle cx="60" cy="60" r="56" fill="#0E1826" stroke="url(#badgeRing)" stroke-width="3"/>
-      <circle cx="60" cy="60" r="46" fill="none" stroke="url(#badgeRing)" stroke-width="1"/>
-      <!-- Star of David monogram at the badge's center -->
-      <g transform="translate(60,60)">
-        <polygon points="0,-26 22.5,13 -22.5,13" fill="none" stroke="url(#badgeBlue)" stroke-width="2.4"/>
-        <polygon points="0,26 22.5,-13 -22.5,-13" fill="none" stroke="url(#badgeRing)" stroke-width="2.4"/>
-      </g>
-      <!-- tick marks, dashboard-gauge feel -->
-      <g stroke="url(#badgeRing)" stroke-width="1.4" opacity=".55">
-        <line x1="60" y1="8" x2="60" y2="16"/>
-        <line x1="60" y1="104" x2="60" y2="112"/>
-        <line x1="8" y1="60" x2="16" y2="60"/>
-        <line x1="104" y1="60" x2="112" y2="60"/>
-      </g>
-    </svg>
+    <img src="bmw-logo.png" alt="BMW" id="badgeImg" onerror="this.style.opacity='0'">
   </div>
 
   <p class="eyebrow">Bar&nbsp;Mitsva</p>
   <h1 class="name-title">Eliel Meïr</h1>
   <p class="name-sub">Famille Wellner &amp; Famille El Mouchnino</p>
+
+  <div class="portrait-frame">
+    <img src="eliel-meir-photo.jpg" alt="Eliel Meïr">
+  </div>
 
   <p class="sub-date">Dimanche 15 Novembre 2026</p>
   <p class="sub-place">Factory 58 &ndash; Le Salon La Villa, Bobigny</p>
@@ -426,7 +462,7 @@
 
   <div class="rsvp">
     <h3>Confirmation de pr&eacute;sence</h3>
-    <p class="sub">Merci de r&eacute;pondre avant le 15 Octobre 2026</p>
+    <p class="sub">Merci de r&eacute;pondre avant le 15 octobre 2026</p>
     <form id="rsvpForm">
       <div class="field-row">
         <div class="field">
@@ -479,13 +515,7 @@
   </div>
 
   <div class="footer-mark">
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="56" fill="none" stroke="#B9C6D2" stroke-width="1.4" opacity=".6"/>
-      <g transform="translate(60,60)">
-        <polygon points="0,-24 21,12 -21,12" fill="none" stroke="#6FA8F5" stroke-width="1.8"/>
-        <polygon points="0,24 21,-12 -21,-12" fill="none" stroke="#B9C6D2" stroke-width="1.8"/>
-      </g>
-    </svg>
+    <img src="bmw-logo.png" alt="BMW" onerror="this.style.opacity='0'">
   </div>
 
 </section>
@@ -519,12 +549,59 @@
   const invitation = document.getElementById('invitation');
   const openBtn = document.getElementById('openBtn');
 
-  openBtn.addEventListener('click', () => {
-    cover.classList.add('hide');
+  // ===== LED MATRIX INTRO (two headlight-style matrices sweeping toward the center) =====
+  function runLedIntro(afterCallback){
+    const overlay = document.getElementById('ledOverlay');
+    const leftC = document.getElementById('ledLeft');
+    const rightC = document.getElementById('ledRight');
+    leftC.innerHTML = '';
+    rightC.innerHTML = '';
+
+    const cols = 6, rows = 8;
+    const leftCells = [], rightCells = [];
+    for(let i=0; i<cols*rows; i++){
+      const cellL = document.createElement('div');
+      cellL.className = 'led-cell';
+      leftC.appendChild(cellL);
+      leftCells.push(cellL);
+
+      const cellR = document.createElement('div');
+      cellR.className = 'led-cell';
+      rightC.appendChild(cellR);
+      rightCells.push(cellR);
+    }
+
+    overlay.classList.add('active');
+
+    const stepDelay = 38;
+    // left matrix sweeps left -> right (inward); right matrix sweeps right -> left (inward)
+    leftCells.forEach((cell, i) => {
+      const col = i % cols, row = Math.floor(i / cols);
+      setTimeout(() => cell.classList.add('on'), col * stepDelay + row * 10);
+    });
+    rightCells.forEach((cell, i) => {
+      const col = i % cols, row = Math.floor(i / cols);
+      setTimeout(() => cell.classList.add('on'), (cols - 1 - col) * stepDelay + row * 10);
+    });
+
+    const holdAt = cols * stepDelay + rows * 10 + 260;
     setTimeout(() => {
-      invitation.classList.add('show');
-      invitation.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 250);
+      overlay.classList.add('fade-out');
+      setTimeout(() => {
+        overlay.classList.remove('active', 'fade-out');
+        if(afterCallback) afterCallback();
+      }, 550);
+    }, holdAt);
+  }
+
+  openBtn.addEventListener('click', () => {
+    runLedIntro(() => {
+      cover.classList.add('hide');
+      setTimeout(() => {
+        invitation.classList.add('show');
+        invitation.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 250);
+    });
   });
 
   // ===== BLOQUER LA DATE : g\u00e9n\u00e8re un fichier .ics =====
