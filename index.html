@@ -29,8 +29,6 @@
     overflow-x:hidden;
     min-height:100vh;
   }
-
-  /* ===== NIGHT-ROAD BACKDROP ===== */
   .road-bg{
     position:fixed; inset:0; z-index:0; pointer-events:none;
     background:
@@ -47,8 +45,6 @@
             mask-image:linear-gradient(180deg, transparent, black 60%);
     opacity:.5;
   }
-
-  /* ===== COVER ===== */
   #cover{
     position:relative; z-index:2;
     min-height:100vh;
@@ -71,21 +67,16 @@
     border-top:1px solid rgba(62,127,219,.35);
     border-bottom:1px solid rgba(62,127,219,.35);
   }
-
   .bsd{
     font-family:'Barlow', sans-serif;
     font-size:14px; letter-spacing:.1em; color:var(--chrome); opacity:.6; margin:0 0 26px;
   }
-
-  /* Chrome monogram badge — evokes a car emblem without copying any brand mark */
   .badge{
     width:118px; height:118px; margin-bottom:22px;
     display:flex; align-items:center; justify-content:center;
     filter:drop-shadow(0 0 22px rgba(62,127,219,.35));
   }
   .badge img{ width:100%; height:100%; object-fit:contain; transition:opacity .4s ease; }
-
-  /* ===== LED MATRIX OPENING ANIMATION ===== */
   .led-overlay{
     position:fixed; inset:0; z-index:60;
     background:#000;
@@ -116,7 +107,6 @@
     background:var(--blue-glow);
     box-shadow:0 0 8px 2px rgba(111,168,245,.85), 0 0 18px 5px rgba(111,168,245,.35);
   }
-
   .eyebrow{
     font-family:'Oswald', sans-serif;
     font-weight:500;
@@ -125,7 +115,7 @@
     color:var(--blue-glow);
     text-transform:uppercase;
     margin:0 0 20px;
-    padding-left:.5em; /* optical centering for the wide tracking */
+    padding-left:.5em;
   }
   .name-title{
     font-family:'Barlow Condensed', sans-serif;
@@ -145,7 +135,6 @@
     letter-spacing:.06em;
     margin:0 0 34px;
   }
-
   .sub-date{
     font-family:'Oswald', sans-serif;
     font-size:20px; font-weight:500;
@@ -153,7 +142,6 @@
     color:var(--chrome-bright);
     margin-bottom:4px;
   }
-
   .portrait-frame{
     width:min(260px, 62vw);
     aspect-ratio:733/1024;
@@ -179,8 +167,6 @@
     margin-bottom:40px;
     letter-spacing:.02em;
   }
-
-  /* Odometer-style countdown */
   .countdown{
     display:flex; gap:2px; margin-bottom:44px;
     border:1px solid var(--line);
@@ -206,7 +192,6 @@
   .cd-label{
     font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--chrome); opacity:.7;
   }
-
   .btn-chrome{
     font-family:'Oswald', sans-serif;
     letter-spacing:.16em;
@@ -224,8 +209,6 @@
   }
   .btn-chrome:hover{ transform:translateY(-2px); box-shadow:0 14px 32px rgba(62,127,219,.25); }
   .btn-chrome:active{ transform:translateY(0); }
-
-  /* ===== INVITATION ===== */
   #invitation{
     position:relative; z-index:2;
     max-width:720px; margin:0 auto;
@@ -234,7 +217,6 @@
     transition:opacity 1s ease, transform 1s ease;
   }
   #invitation.show{ opacity:1; transform:translateY(0); }
-
   .inv-intro{ text-align:center; margin-bottom:50px; }
   .inv-lede{
     font-size:19px; line-height:1.7; color:var(--chrome-bright);
@@ -249,13 +231,11 @@
     letter-spacing:.02em;
     margin:0;
   }
-
   .divider{
     display:flex; align-items:center; gap:16px; margin:0 auto 46px; max-width:320px;
   }
   .divider .line{ flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--line) 30%, var(--line) 70%, transparent); }
   .divider .dot{ width:5px; height:5px; border-radius:50%; background:var(--blue-glow); box-shadow:0 0 8px var(--blue-glow); }
-
   .event-card{
     border:1px solid var(--line);
     background:linear-gradient(180deg, var(--steel-mid), var(--steel));
@@ -301,8 +281,6 @@
     transition:transform .2s ease, box-shadow .2s ease;
   }
   .save-date-btn:hover{ transform:translateY(-2px); }
-
-  /* license-plate style "Mazal Tov" motif, echoing the client's original visual */
   .plate{
     display:inline-flex; align-items:center; gap:10px;
     margin:0 auto 50px; padding:10px 22px;
@@ -315,15 +293,12 @@
   }
   .plate-wrap{ text-align:center; }
   .plate::before, .plate::after{ content:''; width:6px; height:20px; background:#7C8C9C; border-radius:1px; }
-
   .hosts{ text-align:center; margin:50px 0 56px; }
   .hosts-line{ font-size:18px; color:var(--chrome-bright); margin-bottom:14px; }
   .hosts-names{
     font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:22px; letter-spacing:.05em;
     text-transform:uppercase; color:var(--blue-glow);
   }
-
-  /* RSVP */
   .rsvp{
     border:1px solid var(--line);
     padding:40px 32px 34px;
@@ -352,7 +327,6 @@
   .radio-opt{ display:flex; align-items:center; gap:8px; font-size:16px; color:var(--chrome-bright); cursor:pointer; }
   .radio-opt input{ accent-color:var(--blue); width:16px; height:16px; }
   .err{ color:#E67878; font-size:13px; margin-top:6px; display:none; }
-
   .sub-fields{
     display:none;
     gap:16px; flex-wrap:wrap;
@@ -361,7 +335,6 @@
   }
   .sub-fields.show{ display:flex; }
   .sub-fields .field{ flex:1; min-width:160px; margin-bottom:0; }
-
   .rsvp-submit{
     display:block; margin:26px auto 0; font-family:'Oswald', sans-serif; letter-spacing:.14em; text-transform:uppercase;
     font-size:14px; font-weight:500; color:var(--onyx); background:linear-gradient(180deg, var(--chrome-bright), var(--chrome));
@@ -373,9 +346,37 @@
   .rsvp-msg{ text-align:center; margin-top:18px; font-size:16px; display:none; }
   .rsvp-msg.ok{ color:#8FCB8F; display:block; }
   .rsvp-msg.bad{ color:#E67878; display:block; }
-
   .footer-mark{ width:72px; height:72px; margin:60px auto 0; opacity:.9; }
   .footer-mark img{ width:100%; height:100%; object-fit:contain; }
+
+  /* ===== MUSIC TOGGLE ===== */
+  .music-toggle{
+    position:fixed; top:18px; right:18px; z-index:70;
+    width:46px; height:46px; border-radius:50%;
+    background:linear-gradient(180deg, var(--steel-mid), var(--steel));
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
+    opacity:0; pointer-events:none;
+    transition:opacity .5s ease, transform .2s ease;
+  }
+  .music-toggle.visible{ opacity:1; pointer-events:auto; }
+  .music-toggle:hover{ transform:scale(1.06); }
+  .music-toggle svg{ width:20px; height:20px; }
+  .music-toggle .bar{
+    fill:var(--blue-glow);
+    transform-origin:bottom;
+    animation:eq 0.9s ease-in-out infinite;
+  }
+  .music-toggle.paused .bar{ animation-play-state:paused; }
+  .music-toggle .bar:nth-child(1){ animation-delay:0s; }
+  .music-toggle .bar:nth-child(2){ animation-delay:.2s; }
+  .music-toggle .bar:nth-child(3){ animation-delay:.4s; }
+  @keyframes eq{
+    0%,100%{ transform:scaleY(.4); }
+    50%{ transform:scaleY(1); }
+  }
 
   @media (max-width:480px){
     .cd-box{ width:58px; padding:10px 2px 8px; }
@@ -389,6 +390,14 @@
 <body>
 
 <div class="road-bg"></div>
+
+<!-- Musique de fond, lancée quand l'invitation s'ouvre -->
+<audio id="bgMusic" src="musique.mp3" loop preload="auto"></audio>
+
+<!-- Bouton discret pour couper/relancer le son une fois la musique démarrée -->
+<button type="button" class="music-toggle" id="musicToggle" aria-label="Couper / activer la musique">
+  <svg viewBox="0 0 24 24"><rect class="bar" x="4" y="10" width="3" height="6" rx="1"></rect><rect class="bar" x="10.5" y="6" width="3" height="14" rx="1"></rect><rect class="bar" x="17" y="9" width="3" height="8" rx="1"></rect></svg>
+</button>
 
 <!-- LED matrix headlight-style intro, played when the invitation opens -->
 <div class="led-overlay" id="ledOverlay">
@@ -522,7 +531,6 @@
 
 <script>
   // ===== CONFIG =====
-  // Remplace cette URL par celle de ton Google Apps Script Web App pour recevoir les r\u00e9ponses RSVP
   const SCRIPT_URL = "COLLE_ICI_TON_URL_GOOGLE_APPS_SCRIPT";
 
   // ===== COUNTDOWN =====
@@ -549,7 +557,38 @@
   const invitation = document.getElementById('invitation');
   const openBtn = document.getElementById('openBtn');
 
-  // ===== LED MATRIX INTRO (two headlight-style matrices sweeping toward the center) =====
+  // ===== MUSIQUE =====
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+
+  function startMusic(){
+    bgMusic.volume = 0.7;
+    const playPromise = bgMusic.play();
+    if(playPromise !== undefined){
+      playPromise
+        .then(() => {
+          musicToggle.classList.remove('paused');
+          musicToggle.classList.add('visible');
+        })
+        .catch(() => {
+          musicToggle.classList.add('visible', 'paused');
+        });
+    } else {
+      musicToggle.classList.add('visible');
+    }
+  }
+
+  musicToggle.addEventListener('click', () => {
+    if(bgMusic.paused){
+      bgMusic.play();
+      musicToggle.classList.remove('paused');
+    } else {
+      bgMusic.pause();
+      musicToggle.classList.add('paused');
+    }
+  });
+
+  // ===== LED MATRIX INTRO =====
   function runLedIntro(afterCallback){
     const overlay = document.getElementById('ledOverlay');
     const leftC = document.getElementById('ledLeft');
@@ -574,7 +613,6 @@
     overlay.classList.add('active');
 
     const stepDelay = 38;
-    // left matrix sweeps left -> right (inward); right matrix sweeps right -> left (inward)
     leftCells.forEach((cell, i) => {
       const col = i % cols, row = Math.floor(i / cols);
       setTimeout(() => cell.classList.add('on'), col * stepDelay + row * 10);
@@ -595,6 +633,7 @@
   }
 
   openBtn.addEventListener('click', () => {
+    startMusic();
     runLedIntro(() => {
       cover.classList.add('hide');
       setTimeout(() => {
@@ -604,7 +643,7 @@
     });
   });
 
-  // ===== BLOQUER LA DATE : g\u00e9n\u00e8re un fichier .ics =====
+  // ===== BLOQUER LA DATE =====
   document.getElementById('saveDateBtn').addEventListener('click', () => {
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -636,7 +675,7 @@
     setTimeout(() => URL.revokeObjectURL(url), 3000);
   });
 
-  // ===== RSVP FORM : toggle sub-fields =====
+  // ===== RSVP FORM =====
   const presenceSubFields = document.getElementById('presence-sub-fields');
   document.querySelectorAll('input[name="presence"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -648,7 +687,6 @@
     });
   });
 
-  // ===== RSVP FORM SUBMIT =====
   const form = document.getElementById('rsvpForm');
   const submitBtn = document.getElementById('rsvpSubmitBtn');
   const msgEl = document.getElementById('rsvpMsg');
