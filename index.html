@@ -143,18 +143,18 @@
     margin-bottom:4px;
   }
   .portrait-frame{
-    width:min(260px, 62vw);
+    width:min(320px, 78vw);
     aspect-ratio:733/1024;
     margin:6px 0 32px;
     border-radius:6px;
     overflow:hidden;
     position:relative;
     border:1px solid var(--line);
+    background:var(--steel);
     box-shadow:0 0 0 6px var(--onyx), 0 0 0 7px var(--line), 0 20px 46px rgba(0,0,0,.5), 0 0 30px rgba(62,127,219,.18);
   }
   .portrait-frame img{
-    width:100%; height:100%; object-fit:cover; display:block;
-    object-position: center 20%; /* Cadrage : ajuste ce % pour recadrer la photo (0%=haut, 50%=centre, 100%=bas) */
+    width:100%; height:100%; object-fit:contain; display:block;
   }
   .portrait-frame::after{
     content:'';
