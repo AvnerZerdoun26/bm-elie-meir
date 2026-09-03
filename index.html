@@ -145,7 +145,7 @@
   .portrait-frame{
     width:min(320px, 78vw);
     aspect-ratio:733/1024;
-    margin:6px 0 32px;
+    margin:6px 0 24px;
     border-radius:6px;
     overflow:hidden;
     position:relative;
@@ -154,12 +154,32 @@
     box-shadow:0 0 0 6px var(--onyx), 0 0 0 7px var(--line), 0 20px 46px rgba(0,0,0,.5), 0 0 30px rgba(62,127,219,.18);
   }
   .portrait-frame img{
-    width:100%; height:100%; object-fit:contain; display:block;
+    width:100%; height:100%; object-fit:cover; object-position:center; display:block;
   }
   .portrait-frame::after{
     content:'';
     position:absolute; inset:0;
     box-shadow:inset 0 0 30px rgba(0,0,0,.35);
+    pointer-events:none;
+  }
+  .car-frame{
+    width:min(280px, 70vw);
+    aspect-ratio:16/9;
+    margin:0 0 32px;
+    border-radius:6px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--steel);
+    box-shadow:0 0 0 6px var(--onyx), 0 0 0 7px var(--line), 0 16px 38px rgba(0,0,0,.45), 0 0 26px rgba(62,127,219,.2);
+  }
+  .car-frame img{
+    width:100%; height:100%; object-fit:cover; object-position:center; display:block;
+  }
+  .car-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    box-shadow:inset 0 0 26px rgba(0,0,0,.35);
     pointer-events:none;
   }
   .sub-place{
@@ -422,6 +442,10 @@
 
   <div class="portrait-frame">
     <img src="Bm-elie-meir.jpg" alt="Eliel Meïr">
+  </div>
+
+  <div class="car-frame">
+    <img src="bmw-bleue.jpg" alt="BMW bleue" onerror="this.parentElement.style.display='none'">
   </div>
 
   <p class="sub-date"></p>
